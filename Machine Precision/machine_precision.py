@@ -1,20 +1,34 @@
 from colors import bcolors
 
 
-def machine_epsilon():
-    eps = 1
-    while (1 + eps) > 1:
-        eps = eps / 2
+class printColors:
+    @staticmethod
+    def print_fail_msg(msg):
+        print(bcolors.FAIL, msg, bcolors.ENDC)
 
-    eps = eps * 2
+    @staticmethod
+    def print_okgreen_msg(msg):
+        print(bcolors.OKGREEN, msg, bcolors.ENDC)
+
+    @staticmethod
+    def print_okblue_msg(msg):
+        print(bcolors.OKBLUE, msg, bcolors.ENDC)
+
+
+def get_machine_epsilon():
+    eps = 1.0
+    while (1.0 + eps) > 1.0:
+        eps = eps / 2.0
+
+    eps = eps * 2.0
     return eps
 
 
 if __name__ == '__main__':
-    m_eps = machine_epsilon()
-    print(bcolors.OKBLUE, "Machine Precision  : ", m_eps, bcolors.ENDC)
+    epsilon = get_machine_epsilon()
+    printColors.print_okblue_msg(f"Machine Precision  : {epsilon}")
 
-    expression = abs(3.0 * (4.0 / 3.0 - 1) - 1)
-    print("\nResult of abs(3.0 * (4.0 / 3.0 - 1) - 1) :")
-    print(bcolors.FAIL, "before using machine epsilon: {}".format(expression), bcolors.ENDC)
-    print(bcolors.OKGREEN, "After correcting with machine epsilon: {}".format(expression - m_eps), bcolors.ENDC)
+    expression = abs(3.0 * (4.0 / 3.0 - 1.0) - 1.0)
+    print("\nResult of abs(3.0 * (4.0 / 3.0 - 1.0) - 1.0) :")
+    printColors.print_fail_msg(f"before using machine epsilon: {format(expression)}")
+    printColors.print_okgreen_msg(f"After correcting with machine epsilon: {format(expression - epsilon)}")
