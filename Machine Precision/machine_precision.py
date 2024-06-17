@@ -1,18 +1,8 @@
 from colors import bcolors
 
 
-class printColors:
-    @staticmethod
-    def print_fail_msg(msg):
-        print(bcolors.FAIL, msg, bcolors.ENDC)
-
-    @staticmethod
-    def print_okgreen_msg(msg):
-        print(bcolors.OKGREEN, msg, bcolors.ENDC)
-
-    @staticmethod
-    def print_okblue_msg(msg):
-        print(bcolors.OKBLUE, msg, bcolors.ENDC)
+def print_with_colors(color, msg):
+    print(color, msg, bcolors.ENDC)
 
 
 def get_machine_epsilon():
@@ -26,9 +16,9 @@ def get_machine_epsilon():
 
 if __name__ == '__main__':
     epsilon = get_machine_epsilon()
-    printColors.print_okblue_msg(f"Machine Precision  : {epsilon}")
+    print_with_colors(bcolors.OKBLUE, f"Machine Precision  : {epsilon}")
 
     expression = abs(3.0 * (4.0 / 3.0 - 1.0) - 1.0)
     print("\nResult of abs(3.0 * (4.0 / 3.0 - 1.0) - 1.0) :")
-    printColors.print_fail_msg(f"before using machine epsilon: {format(expression)}")
-    printColors.print_okgreen_msg(f"After correcting with machine epsilon: {format(expression - epsilon)}")
+    print_with_colors(bcolors.FAIL, f"before using machine epsilon: {format(expression)}")
+    print_with_colors(bcolors.OKGREEN, f"After correcting with machine epsilon: {format(expression - epsilon)}")
